@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="906a7c12e2be4dd28ad2ff1648424395" Name="Diagram1">
+        <EntityTypeShape EntityType="KOBDB_Model.blood_donations" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.blood_stocks" Width="1.5" PointX="9.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.city" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.department" Width="1.5" PointX="14.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.district" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.donor" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.health_questionnaires" Width="1.5" PointX="7.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.hospital" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.lab_tests" Width="1.5" PointX="9.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.organ_donations" Width="1.5" PointX="7.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.patient" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.permission" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.request" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.role_permissions" Width="1.5" PointX="14" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.role" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.transfer" Width="1.5" PointX="12" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.user_logs" Width="1.5" PointX="19.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOBDB_Model.user" Width="1.5" PointX="17" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="KOBDB_Model.FK__blood_don__donor__540C7B00" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__blood_don__hospi__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__blood_sto__donat__5D95E53A" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__lab_tests__donat__59C55456" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__transfers__stock__72910220" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__districts__city___2BFE89A6" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__donors__city_id__498EEC8D" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__hospitals__city___2EDAF651" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__users__departmen__3D2915A8" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__donors__district__4A8310C6" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__health_qu__donor__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__organ_don__donor__625A9A57" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__patients__hospit__690797E6" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__transfers__organ__73852659" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__requests__patien__6CD828CA" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__role_perm__permi__395884C4" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__transfers__reque__719CDDE7" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__role_perm__role___3864608B" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__users__role_id__3E1D39E1" ManuallyRouted="false" />
+        <AssociationConnector Association="KOBDB_Model.FK__user_logs__user___44CA3770" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

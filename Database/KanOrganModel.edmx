@@ -1,0 +1,1524 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KOBDB_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="blood_donations">
+          <Key>
+            <PropertyRef Name="donation_id" />
+          </Key>
+          <Property Name="donation_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="donor_id" Type="int" />
+          <Property Name="hospital_id" Type="int" />
+          <Property Name="donation_date" Type="datetime" />
+          <Property Name="bag_barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="amount_ml" Type="int" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="rejection_reason" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="blood_stocks">
+          <Key>
+            <PropertyRef Name="stock_id" />
+          </Key>
+          <Property Name="stock_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="donation_id" Type="int" />
+          <Property Name="product_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="blood_type" Type="nvarchar" MaxLength="5" />
+          <Property Name="rh_factor" Type="nvarchar" MaxLength="10" />
+          <Property Name="expiration_date" Type="datetime" />
+          <Property Name="is_used" Type="bit" />
+          <Property Name="location_shelf" Type="nvarchar" MaxLength="50" />
+          <Property Name="entry_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="cities">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="departments">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="department_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="districts">
+          <Key>
+            <PropertyRef Name="district_id" />
+          </Key>
+          <Property Name="district_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city_id" Type="int" />
+          <Property Name="district_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="donors">
+          <Key>
+            <PropertyRef Name="donor_id" />
+          </Key>
+          <Property Name="donor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tckn" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="name_surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="birth_date" Type="date" />
+          <Property Name="gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="blood_type" Type="nvarchar" MaxLength="5" />
+          <Property Name="rh_factor" Type="nvarchar" MaxLength="10" />
+          <Property Name="weight" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="city_id" Type="int" />
+          <Property Name="district_id" Type="int" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="250" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="last_donation_date" Type="datetime" />
+          <Property Name="is_organ_donor" Type="bit" />
+          <Property Name="registration_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="health_questionnaires">
+          <Key>
+            <PropertyRef Name="questionnaire_id" />
+          </Key>
+          <Property Name="questionnaire_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="donor_id" Type="int" />
+          <Property Name="form_date" Type="datetime" />
+          <Property Name="is_eligible" Type="bit" />
+        </EntityType>
+        <EntityType Name="hospitals">
+          <Key>
+            <PropertyRef Name="hospital_id" />
+          </Key>
+          <Property Name="hospital_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hospital_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="city_id" Type="int" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="lab_tests">
+          <Key>
+            <PropertyRef Name="test_id" />
+          </Key>
+          <Property Name="test_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="donation_id" Type="int" />
+          <Property Name="test_date" Type="datetime" />
+          <Property Name="hepatitis_b" Type="bit" />
+          <Property Name="hepatitis_c" Type="bit" />
+          <Property Name="hiv" Type="bit" />
+          <Property Name="syphilis" Type="bit" />
+          <Property Name="test_result" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="organ_donations">
+          <Key>
+            <PropertyRef Name="organ_id" />
+          </Key>
+          <Property Name="organ_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="donor_id" Type="int" />
+          <Property Name="organ_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="tissue_type_hla" Type="nvarchar" MaxLength="50" />
+          <Property Name="donation_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="is_matched" Type="bit" />
+        </EntityType>
+        <EntityType Name="patients">
+          <Key>
+            <PropertyRef Name="patient_id" />
+          </Key>
+          <Property Name="patient_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tckn" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="name_surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="birth_date" Type="date" />
+          <Property Name="blood_type" Type="nvarchar" MaxLength="5" />
+          <Property Name="rh_factor" Type="nvarchar" MaxLength="10" />
+          <Property Name="hospital_id" Type="int" />
+          <Property Name="diagnosis" Type="nvarchar(max)" />
+          <Property Name="urgency_status" Type="nvarchar" MaxLength="20" />
+          <Property Name="registration_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="permissions">
+          <Key>
+            <PropertyRef Name="permission_id" />
+          </Key>
+          <Property Name="permission_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="permission_key" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="request_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" />
+          <Property Name="request_type" Type="nvarchar" MaxLength="20" />
+          <Property Name="required_product" Type="nvarchar" MaxLength="50" />
+          <Property Name="amount" Type="int" />
+          <Property Name="request_date" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+          <Property Name="priority_score" Type="int" />
+        </EntityType>
+        <EntityType Name="role_permissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_id" Type="int" />
+          <Property Name="permission_id" Type="int" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="transfers">
+          <Key>
+            <PropertyRef Name="transfer_id" />
+          </Key>
+          <Property Name="transfer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="request_id" Type="int" />
+          <Property Name="stock_id" Type="int" />
+          <Property Name="organ_id" Type="int" />
+          <Property Name="courier_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="departure_time" Type="datetime" />
+          <Property Name="actual_arrival" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="user_logs">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="action_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+          <Property Name="log_date" Type="datetime" />
+          <Property Name="ip_address" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="department_id" Type="int" />
+          <Property Name="role_id" Type="int" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="name_surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="is_locked" Type="bit" />
+          <Property Name="failed_login_count" Type="int" />
+          <Property Name="last_login_date" Type="datetime" />
+          <Property Name="created_date" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__blood_don__donor__540C7B00">
+          <End Role="donors" Type="Self.donors" Multiplicity="0..1" />
+          <End Role="blood_donations" Type="Self.blood_donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donors">
+              <PropertyRef Name="donor_id" />
+            </Principal>
+            <Dependent Role="blood_donations">
+              <PropertyRef Name="donor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__blood_don__hospi__55009F39">
+          <End Role="hospitals" Type="Self.hospitals" Multiplicity="0..1" />
+          <End Role="blood_donations" Type="Self.blood_donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hospitals">
+              <PropertyRef Name="hospital_id" />
+            </Principal>
+            <Dependent Role="blood_donations">
+              <PropertyRef Name="hospital_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__blood_sto__donat__5D95E53A">
+          <End Role="blood_donations" Type="Self.blood_donations" Multiplicity="0..1" />
+          <End Role="blood_stocks" Type="Self.blood_stocks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blood_donations">
+              <PropertyRef Name="donation_id" />
+            </Principal>
+            <Dependent Role="blood_stocks">
+              <PropertyRef Name="donation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__districts__city___2BFE89A6">
+          <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
+          <End Role="districts" Type="Self.districts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="districts">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__donors__city_id__498EEC8D">
+          <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
+          <End Role="donors" Type="Self.donors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="donors">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__donors__district__4A8310C6">
+          <End Role="districts" Type="Self.districts" Multiplicity="0..1" />
+          <End Role="donors" Type="Self.donors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="districts">
+              <PropertyRef Name="district_id" />
+            </Principal>
+            <Dependent Role="donors">
+              <PropertyRef Name="district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__health_qu__donor__4F47C5E3">
+          <End Role="donors" Type="Self.donors" Multiplicity="0..1" />
+          <End Role="health_questionnaires" Type="Self.health_questionnaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donors">
+              <PropertyRef Name="donor_id" />
+            </Principal>
+            <Dependent Role="health_questionnaires">
+              <PropertyRef Name="donor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hospitals__city___2EDAF651">
+          <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
+          <End Role="hospitals" Type="Self.hospitals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="hospitals">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lab_tests__donat__59C55456">
+          <End Role="blood_donations" Type="Self.blood_donations" Multiplicity="0..1" />
+          <End Role="lab_tests" Type="Self.lab_tests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blood_donations">
+              <PropertyRef Name="donation_id" />
+            </Principal>
+            <Dependent Role="lab_tests">
+              <PropertyRef Name="donation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__organ_don__donor__625A9A57">
+          <End Role="donors" Type="Self.donors" Multiplicity="0..1" />
+          <End Role="organ_donations" Type="Self.organ_donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donors">
+              <PropertyRef Name="donor_id" />
+            </Principal>
+            <Dependent Role="organ_donations">
+              <PropertyRef Name="donor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__patients__hospit__690797E6">
+          <End Role="hospitals" Type="Self.hospitals" Multiplicity="0..1" />
+          <End Role="patients" Type="Self.patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hospitals">
+              <PropertyRef Name="hospital_id" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="hospital_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__requests__patien__6CD828CA">
+          <End Role="patients" Type="Self.patients" Multiplicity="0..1" />
+          <End Role="requests" Type="Self.requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patient_id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__role_perm__permi__395884C4">
+          <End Role="permissions" Type="Self.permissions" Multiplicity="0..1" />
+          <End Role="role_permissions" Type="Self.role_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="permissions">
+              <PropertyRef Name="permission_id" />
+            </Principal>
+            <Dependent Role="role_permissions">
+              <PropertyRef Name="permission_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__role_perm__role___3864608B">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="role_permissions" Type="Self.role_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="role_permissions">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transfers__organ__73852659">
+          <End Role="organ_donations" Type="Self.organ_donations" Multiplicity="0..1" />
+          <End Role="transfers" Type="Self.transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organ_donations">
+              <PropertyRef Name="organ_id" />
+            </Principal>
+            <Dependent Role="transfers">
+              <PropertyRef Name="organ_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transfers__reque__719CDDE7">
+          <End Role="requests" Type="Self.requests" Multiplicity="0..1" />
+          <End Role="transfers" Type="Self.transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="requests">
+              <PropertyRef Name="request_id" />
+            </Principal>
+            <Dependent Role="transfers">
+              <PropertyRef Name="request_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transfers__stock__72910220">
+          <End Role="blood_stocks" Type="Self.blood_stocks" Multiplicity="0..1" />
+          <End Role="transfers" Type="Self.transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blood_stocks">
+              <PropertyRef Name="stock_id" />
+            </Principal>
+            <Dependent Role="transfers">
+              <PropertyRef Name="stock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user_logs__user___44CA3770">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="user_logs" Type="Self.user_logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_logs">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__departmen__3D2915A8">
+          <End Role="departments" Type="Self.departments" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departments">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__role_id__3E1D39E1">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="KOBDB_ModelStoreContainer">
+          <EntitySet Name="blood_donations" EntityType="Self.blood_donations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="blood_stocks" EntityType="Self.blood_stocks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cities" EntityType="Self.cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="departments" EntityType="Self.departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="districts" EntityType="Self.districts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="donors" EntityType="Self.donors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="health_questionnaires" EntityType="Self.health_questionnaires" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hospitals" EntityType="Self.hospitals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lab_tests" EntityType="Self.lab_tests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="organ_donations" EntityType="Self.organ_donations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patients" EntityType="Self.patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="permissions" EntityType="Self.permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="requests" EntityType="Self.requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role_permissions" EntityType="Self.role_permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transfers" EntityType="Self.transfers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_logs" EntityType="Self.user_logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__blood_don__donor__540C7B00" Association="Self.FK__blood_don__donor__540C7B00">
+            <End Role="donors" EntitySet="donors" />
+            <End Role="blood_donations" EntitySet="blood_donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__blood_don__hospi__55009F39" Association="Self.FK__blood_don__hospi__55009F39">
+            <End Role="hospitals" EntitySet="hospitals" />
+            <End Role="blood_donations" EntitySet="blood_donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__blood_sto__donat__5D95E53A" Association="Self.FK__blood_sto__donat__5D95E53A">
+            <End Role="blood_donations" EntitySet="blood_donations" />
+            <End Role="blood_stocks" EntitySet="blood_stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__districts__city___2BFE89A6" Association="Self.FK__districts__city___2BFE89A6">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="districts" EntitySet="districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__donors__city_id__498EEC8D" Association="Self.FK__donors__city_id__498EEC8D">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="donors" EntitySet="donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__donors__district__4A8310C6" Association="Self.FK__donors__district__4A8310C6">
+            <End Role="districts" EntitySet="districts" />
+            <End Role="donors" EntitySet="donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__health_qu__donor__4F47C5E3" Association="Self.FK__health_qu__donor__4F47C5E3">
+            <End Role="donors" EntitySet="donors" />
+            <End Role="health_questionnaires" EntitySet="health_questionnaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hospitals__city___2EDAF651" Association="Self.FK__hospitals__city___2EDAF651">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="hospitals" EntitySet="hospitals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lab_tests__donat__59C55456" Association="Self.FK__lab_tests__donat__59C55456">
+            <End Role="blood_donations" EntitySet="blood_donations" />
+            <End Role="lab_tests" EntitySet="lab_tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__organ_don__donor__625A9A57" Association="Self.FK__organ_don__donor__625A9A57">
+            <End Role="donors" EntitySet="donors" />
+            <End Role="organ_donations" EntitySet="organ_donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__patients__hospit__690797E6" Association="Self.FK__patients__hospit__690797E6">
+            <End Role="hospitals" EntitySet="hospitals" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__requests__patien__6CD828CA" Association="Self.FK__requests__patien__6CD828CA">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__role_perm__permi__395884C4" Association="Self.FK__role_perm__permi__395884C4">
+            <End Role="permissions" EntitySet="permissions" />
+            <End Role="role_permissions" EntitySet="role_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__role_perm__role___3864608B" Association="Self.FK__role_perm__role___3864608B">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="role_permissions" EntitySet="role_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transfers__organ__73852659" Association="Self.FK__transfers__organ__73852659">
+            <End Role="organ_donations" EntitySet="organ_donations" />
+            <End Role="transfers" EntitySet="transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transfers__reque__719CDDE7" Association="Self.FK__transfers__reque__719CDDE7">
+            <End Role="requests" EntitySet="requests" />
+            <End Role="transfers" EntitySet="transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transfers__stock__72910220" Association="Self.FK__transfers__stock__72910220">
+            <End Role="blood_stocks" EntitySet="blood_stocks" />
+            <End Role="transfers" EntitySet="transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user_logs__user___44CA3770" Association="Self.FK__user_logs__user___44CA3770">
+            <End Role="users" EntitySet="users" />
+            <End Role="user_logs" EntitySet="user_logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__departmen__3D2915A8" Association="Self.FK__users__departmen__3D2915A8">
+            <End Role="departments" EntitySet="departments" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__role_id__3E1D39E1" Association="Self.FK__users__role_id__3E1D39E1">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KOBDB_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="blood_donations">
+          <Key>
+            <PropertyRef Name="donation_id" />
+          </Key>
+          <Property Name="donation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="donor_id" Type="Int32" />
+          <Property Name="hospital_id" Type="Int32" />
+          <Property Name="donation_date" Type="DateTime" Precision="3" />
+          <Property Name="bag_barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amount_ml" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="rejection_reason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="donor" Relationship="Self.FK__blood_don__donor__540C7B00" FromRole="blood_donations" ToRole="donors" />
+          <NavigationProperty Name="hospital" Relationship="Self.FK__blood_don__hospi__55009F39" FromRole="blood_donations" ToRole="hospitals" />
+          <NavigationProperty Name="blood_stocks" Relationship="Self.FK__blood_sto__donat__5D95E53A" FromRole="blood_donations" ToRole="blood_stocks" />
+          <NavigationProperty Name="lab_tests" Relationship="Self.FK__lab_tests__donat__59C55456" FromRole="blood_donations" ToRole="lab_tests" />
+        </EntityType>
+        <EntityType Name="blood_stocks">
+          <Key>
+            <PropertyRef Name="stock_id" />
+          </Key>
+          <Property Name="stock_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="donation_id" Type="Int32" />
+          <Property Name="product_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="blood_type" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="rh_factor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="expiration_date" Type="DateTime" Precision="3" />
+          <Property Name="is_used" Type="Boolean" />
+          <Property Name="location_shelf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="entry_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="blood_donations" Relationship="Self.FK__blood_sto__donat__5D95E53A" FromRole="blood_stocks" ToRole="blood_donations" />
+          <NavigationProperty Name="transfers" Relationship="Self.FK__transfers__stock__72910220" FromRole="blood_stocks" ToRole="transfers" />
+        </EntityType>
+        <EntityType Name="city">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="districts" Relationship="Self.FK__districts__city___2BFE89A6" FromRole="cities" ToRole="districts" />
+          <NavigationProperty Name="donors" Relationship="Self.FK__donors__city_id__498EEC8D" FromRole="cities" ToRole="donors" />
+          <NavigationProperty Name="hospitals" Relationship="Self.FK__hospitals__city___2EDAF651" FromRole="cities" ToRole="hospitals" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="department_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK__users__departmen__3D2915A8" FromRole="departments" ToRole="users" />
+        </EntityType>
+        <EntityType Name="district">
+          <Key>
+            <PropertyRef Name="district_id" />
+          </Key>
+          <Property Name="district_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city_id" Type="Int32" />
+          <Property Name="district_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="city" Relationship="Self.FK__districts__city___2BFE89A6" FromRole="districts" ToRole="cities" />
+          <NavigationProperty Name="donors" Relationship="Self.FK__donors__district__4A8310C6" FromRole="districts" ToRole="donors" />
+        </EntityType>
+        <EntityType Name="donor">
+          <Key>
+            <PropertyRef Name="donor_id" />
+          </Key>
+          <Property Name="donor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tckn" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name_surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birth_date" Type="DateTime" Precision="0" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="blood_type" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="rh_factor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="weight" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="city_id" Type="Int32" />
+          <Property Name="district_id" Type="Int32" />
+          <Property Name="address_detail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="last_donation_date" Type="DateTime" Precision="3" />
+          <Property Name="is_organ_donor" Type="Boolean" />
+          <Property Name="registration_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="blood_donations" Relationship="Self.FK__blood_don__donor__540C7B00" FromRole="donors" ToRole="blood_donations" />
+          <NavigationProperty Name="city" Relationship="Self.FK__donors__city_id__498EEC8D" FromRole="donors" ToRole="cities" />
+          <NavigationProperty Name="district" Relationship="Self.FK__donors__district__4A8310C6" FromRole="donors" ToRole="districts" />
+          <NavigationProperty Name="health_questionnaires" Relationship="Self.FK__health_qu__donor__4F47C5E3" FromRole="donors" ToRole="health_questionnaires" />
+          <NavigationProperty Name="organ_donations" Relationship="Self.FK__organ_don__donor__625A9A57" FromRole="donors" ToRole="organ_donations" />
+        </EntityType>
+        <EntityType Name="health_questionnaires">
+          <Key>
+            <PropertyRef Name="questionnaire_id" />
+          </Key>
+          <Property Name="questionnaire_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="donor_id" Type="Int32" />
+          <Property Name="form_date" Type="DateTime" Precision="3" />
+          <Property Name="is_eligible" Type="Boolean" />
+          <NavigationProperty Name="donor" Relationship="Self.FK__health_qu__donor__4F47C5E3" FromRole="health_questionnaires" ToRole="donors" />
+        </EntityType>
+        <EntityType Name="hospital">
+          <Key>
+            <PropertyRef Name="hospital_id" />
+          </Key>
+          <Property Name="hospital_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hospital_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city_id" Type="Int32" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="blood_donations" Relationship="Self.FK__blood_don__hospi__55009F39" FromRole="hospitals" ToRole="blood_donations" />
+          <NavigationProperty Name="city" Relationship="Self.FK__hospitals__city___2EDAF651" FromRole="hospitals" ToRole="cities" />
+          <NavigationProperty Name="patients" Relationship="Self.FK__patients__hospit__690797E6" FromRole="hospitals" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="lab_tests">
+          <Key>
+            <PropertyRef Name="test_id" />
+          </Key>
+          <Property Name="test_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="donation_id" Type="Int32" />
+          <Property Name="test_date" Type="DateTime" Precision="3" />
+          <Property Name="hepatitis_b" Type="Boolean" />
+          <Property Name="hepatitis_c" Type="Boolean" />
+          <Property Name="hiv" Type="Boolean" />
+          <Property Name="syphilis" Type="Boolean" />
+          <Property Name="test_result" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="blood_donations" Relationship="Self.FK__lab_tests__donat__59C55456" FromRole="lab_tests" ToRole="blood_donations" />
+        </EntityType>
+        <EntityType Name="organ_donations">
+          <Key>
+            <PropertyRef Name="organ_id" />
+          </Key>
+          <Property Name="organ_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="donor_id" Type="Int32" />
+          <Property Name="organ_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tissue_type_hla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="donation_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="is_matched" Type="Boolean" />
+          <NavigationProperty Name="donor" Relationship="Self.FK__organ_don__donor__625A9A57" FromRole="organ_donations" ToRole="donors" />
+          <NavigationProperty Name="transfers" Relationship="Self.FK__transfers__organ__73852659" FromRole="organ_donations" ToRole="transfers" />
+        </EntityType>
+        <EntityType Name="patient">
+          <Key>
+            <PropertyRef Name="patient_id" />
+          </Key>
+          <Property Name="patient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tckn" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name_surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birth_date" Type="DateTime" Precision="0" />
+          <Property Name="blood_type" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="rh_factor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hospital_id" Type="Int32" />
+          <Property Name="diagnosis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="urgency_status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="registration_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="hospital" Relationship="Self.FK__patients__hospit__690797E6" FromRole="patients" ToRole="hospitals" />
+          <NavigationProperty Name="requests" Relationship="Self.FK__requests__patien__6CD828CA" FromRole="patients" ToRole="requests" />
+        </EntityType>
+        <EntityType Name="permission">
+          <Key>
+            <PropertyRef Name="permission_id" />
+          </Key>
+          <Property Name="permission_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="permission_key" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="role_permissions" Relationship="Self.FK__role_perm__permi__395884C4" FromRole="permissions" ToRole="role_permissions" />
+        </EntityType>
+        <EntityType Name="request">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" />
+          <Property Name="request_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="required_product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="request_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="priority_score" Type="Int32" />
+          <NavigationProperty Name="patient" Relationship="Self.FK__requests__patien__6CD828CA" FromRole="requests" ToRole="patients" />
+          <NavigationProperty Name="transfers" Relationship="Self.FK__transfers__reque__719CDDE7" FromRole="requests" ToRole="transfers" />
+        </EntityType>
+        <EntityType Name="role_permissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_id" Type="Int32" />
+          <Property Name="permission_id" Type="Int32" />
+          <NavigationProperty Name="permission" Relationship="Self.FK__role_perm__permi__395884C4" FromRole="role_permissions" ToRole="permissions" />
+          <NavigationProperty Name="role" Relationship="Self.FK__role_perm__role___3864608B" FromRole="role_permissions" ToRole="roles" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="role_permissions" Relationship="Self.FK__role_perm__role___3864608B" FromRole="roles" ToRole="role_permissions" />
+          <NavigationProperty Name="users" Relationship="Self.FK__users__role_id__3E1D39E1" FromRole="roles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="transfer">
+          <Key>
+            <PropertyRef Name="transfer_id" />
+          </Key>
+          <Property Name="transfer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="request_id" Type="Int32" />
+          <Property Name="stock_id" Type="Int32" />
+          <Property Name="organ_id" Type="Int32" />
+          <Property Name="courier_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="departure_time" Type="DateTime" Precision="3" />
+          <Property Name="actual_arrival" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="blood_stocks" Relationship="Self.FK__transfers__stock__72910220" FromRole="transfers" ToRole="blood_stocks" />
+          <NavigationProperty Name="organ_donations" Relationship="Self.FK__transfers__organ__73852659" FromRole="transfers" ToRole="organ_donations" />
+          <NavigationProperty Name="request" Relationship="Self.FK__transfers__reque__719CDDE7" FromRole="transfers" ToRole="requests" />
+        </EntityType>
+        <EntityType Name="user_logs">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="action_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="log_date" Type="DateTime" Precision="3" />
+          <Property Name="ip_address" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="user" Relationship="Self.FK__user_logs__user___44CA3770" FromRole="user_logs" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="department_id" Type="Int32" />
+          <Property Name="role_id" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name_surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="is_locked" Type="Boolean" />
+          <Property Name="failed_login_count" Type="Int32" />
+          <Property Name="last_login_date" Type="DateTime" Precision="3" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="department" Relationship="Self.FK__users__departmen__3D2915A8" FromRole="users" ToRole="departments" />
+          <NavigationProperty Name="role" Relationship="Self.FK__users__role_id__3E1D39E1" FromRole="users" ToRole="roles" />
+          <NavigationProperty Name="user_logs" Relationship="Self.FK__user_logs__user___44CA3770" FromRole="users" ToRole="user_logs" />
+        </EntityType>
+        <Association Name="FK__blood_don__donor__540C7B00">
+          <End Role="donors" Type="Self.donor" Multiplicity="0..1" />
+          <End Role="blood_donations" Type="Self.blood_donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donors">
+              <PropertyRef Name="donor_id" />
+            </Principal>
+            <Dependent Role="blood_donations">
+              <PropertyRef Name="donor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__blood_don__hospi__55009F39">
+          <End Role="hospitals" Type="Self.hospital" Multiplicity="0..1" />
+          <End Role="blood_donations" Type="Self.blood_donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hospitals">
+              <PropertyRef Name="hospital_id" />
+            </Principal>
+            <Dependent Role="blood_donations">
+              <PropertyRef Name="hospital_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__blood_sto__donat__5D95E53A">
+          <End Role="blood_donations" Type="Self.blood_donations" Multiplicity="0..1" />
+          <End Role="blood_stocks" Type="Self.blood_stocks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blood_donations">
+              <PropertyRef Name="donation_id" />
+            </Principal>
+            <Dependent Role="blood_stocks">
+              <PropertyRef Name="donation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lab_tests__donat__59C55456">
+          <End Role="blood_donations" Type="Self.blood_donations" Multiplicity="0..1" />
+          <End Role="lab_tests" Type="Self.lab_tests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blood_donations">
+              <PropertyRef Name="donation_id" />
+            </Principal>
+            <Dependent Role="lab_tests">
+              <PropertyRef Name="donation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transfers__stock__72910220">
+          <End Role="blood_stocks" Type="Self.blood_stocks" Multiplicity="0..1" />
+          <End Role="transfers" Type="Self.transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blood_stocks">
+              <PropertyRef Name="stock_id" />
+            </Principal>
+            <Dependent Role="transfers">
+              <PropertyRef Name="stock_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__districts__city___2BFE89A6">
+          <End Role="cities" Type="Self.city" Multiplicity="0..1" />
+          <End Role="districts" Type="Self.district" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="districts">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__donors__city_id__498EEC8D">
+          <End Role="cities" Type="Self.city" Multiplicity="0..1" />
+          <End Role="donors" Type="Self.donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="donors">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hospitals__city___2EDAF651">
+          <End Role="cities" Type="Self.city" Multiplicity="0..1" />
+          <End Role="hospitals" Type="Self.hospital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="hospitals">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__departmen__3D2915A8">
+          <End Role="departments" Type="Self.department" Multiplicity="0..1" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departments">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__donors__district__4A8310C6">
+          <End Role="districts" Type="Self.district" Multiplicity="0..1" />
+          <End Role="donors" Type="Self.donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="districts">
+              <PropertyRef Name="district_id" />
+            </Principal>
+            <Dependent Role="donors">
+              <PropertyRef Name="district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__health_qu__donor__4F47C5E3">
+          <End Role="donors" Type="Self.donor" Multiplicity="0..1" />
+          <End Role="health_questionnaires" Type="Self.health_questionnaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donors">
+              <PropertyRef Name="donor_id" />
+            </Principal>
+            <Dependent Role="health_questionnaires">
+              <PropertyRef Name="donor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__organ_don__donor__625A9A57">
+          <End Role="donors" Type="Self.donor" Multiplicity="0..1" />
+          <End Role="organ_donations" Type="Self.organ_donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donors">
+              <PropertyRef Name="donor_id" />
+            </Principal>
+            <Dependent Role="organ_donations">
+              <PropertyRef Name="donor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__patients__hospit__690797E6">
+          <End Role="hospitals" Type="Self.hospital" Multiplicity="0..1" />
+          <End Role="patients" Type="Self.patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hospitals">
+              <PropertyRef Name="hospital_id" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="hospital_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transfers__organ__73852659">
+          <End Role="organ_donations" Type="Self.organ_donations" Multiplicity="0..1" />
+          <End Role="transfers" Type="Self.transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organ_donations">
+              <PropertyRef Name="organ_id" />
+            </Principal>
+            <Dependent Role="transfers">
+              <PropertyRef Name="organ_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__requests__patien__6CD828CA">
+          <End Role="patients" Type="Self.patient" Multiplicity="0..1" />
+          <End Role="requests" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patient_id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__role_perm__permi__395884C4">
+          <End Role="permissions" Type="Self.permission" Multiplicity="0..1" />
+          <End Role="role_permissions" Type="Self.role_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="permissions">
+              <PropertyRef Name="permission_id" />
+            </Principal>
+            <Dependent Role="role_permissions">
+              <PropertyRef Name="permission_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transfers__reque__719CDDE7">
+          <End Role="requests" Type="Self.request" Multiplicity="0..1" />
+          <End Role="transfers" Type="Self.transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="requests">
+              <PropertyRef Name="request_id" />
+            </Principal>
+            <Dependent Role="transfers">
+              <PropertyRef Name="request_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__role_perm__role___3864608B">
+          <End Role="roles" Type="Self.role" Multiplicity="0..1" />
+          <End Role="role_permissions" Type="Self.role_permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="role_permissions">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__role_id__3E1D39E1">
+          <End Role="roles" Type="Self.role" Multiplicity="0..1" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user_logs__user___44CA3770">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="user_logs" Type="Self.user_logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_logs">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KOBDB_Entites" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="blood_donations" EntityType="Self.blood_donations" />
+          <EntitySet Name="blood_stocks" EntityType="Self.blood_stocks" />
+          <EntitySet Name="cities" EntityType="Self.city" />
+          <EntitySet Name="departments" EntityType="Self.department" />
+          <EntitySet Name="districts" EntityType="Self.district" />
+          <EntitySet Name="donors" EntityType="Self.donor" />
+          <EntitySet Name="health_questionnaires" EntityType="Self.health_questionnaires" />
+          <EntitySet Name="hospitals" EntityType="Self.hospital" />
+          <EntitySet Name="lab_tests" EntityType="Self.lab_tests" />
+          <EntitySet Name="organ_donations" EntityType="Self.organ_donations" />
+          <EntitySet Name="patients" EntityType="Self.patient" />
+          <EntitySet Name="permissions" EntityType="Self.permission" />
+          <EntitySet Name="requests" EntityType="Self.request" />
+          <EntitySet Name="role_permissions" EntityType="Self.role_permissions" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="transfers" EntityType="Self.transfer" />
+          <EntitySet Name="user_logs" EntityType="Self.user_logs" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__blood_don__donor__540C7B00" Association="Self.FK__blood_don__donor__540C7B00">
+            <End Role="donors" EntitySet="donors" />
+            <End Role="blood_donations" EntitySet="blood_donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__blood_don__hospi__55009F39" Association="Self.FK__blood_don__hospi__55009F39">
+            <End Role="hospitals" EntitySet="hospitals" />
+            <End Role="blood_donations" EntitySet="blood_donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__blood_sto__donat__5D95E53A" Association="Self.FK__blood_sto__donat__5D95E53A">
+            <End Role="blood_donations" EntitySet="blood_donations" />
+            <End Role="blood_stocks" EntitySet="blood_stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lab_tests__donat__59C55456" Association="Self.FK__lab_tests__donat__59C55456">
+            <End Role="blood_donations" EntitySet="blood_donations" />
+            <End Role="lab_tests" EntitySet="lab_tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transfers__stock__72910220" Association="Self.FK__transfers__stock__72910220">
+            <End Role="blood_stocks" EntitySet="blood_stocks" />
+            <End Role="transfers" EntitySet="transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__districts__city___2BFE89A6" Association="Self.FK__districts__city___2BFE89A6">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="districts" EntitySet="districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__donors__city_id__498EEC8D" Association="Self.FK__donors__city_id__498EEC8D">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="donors" EntitySet="donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hospitals__city___2EDAF651" Association="Self.FK__hospitals__city___2EDAF651">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="hospitals" EntitySet="hospitals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__departmen__3D2915A8" Association="Self.FK__users__departmen__3D2915A8">
+            <End Role="departments" EntitySet="departments" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__donors__district__4A8310C6" Association="Self.FK__donors__district__4A8310C6">
+            <End Role="districts" EntitySet="districts" />
+            <End Role="donors" EntitySet="donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__health_qu__donor__4F47C5E3" Association="Self.FK__health_qu__donor__4F47C5E3">
+            <End Role="donors" EntitySet="donors" />
+            <End Role="health_questionnaires" EntitySet="health_questionnaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK__organ_don__donor__625A9A57" Association="Self.FK__organ_don__donor__625A9A57">
+            <End Role="donors" EntitySet="donors" />
+            <End Role="organ_donations" EntitySet="organ_donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__patients__hospit__690797E6" Association="Self.FK__patients__hospit__690797E6">
+            <End Role="hospitals" EntitySet="hospitals" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transfers__organ__73852659" Association="Self.FK__transfers__organ__73852659">
+            <End Role="organ_donations" EntitySet="organ_donations" />
+            <End Role="transfers" EntitySet="transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__requests__patien__6CD828CA" Association="Self.FK__requests__patien__6CD828CA">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__role_perm__permi__395884C4" Association="Self.FK__role_perm__permi__395884C4">
+            <End Role="permissions" EntitySet="permissions" />
+            <End Role="role_permissions" EntitySet="role_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transfers__reque__719CDDE7" Association="Self.FK__transfers__reque__719CDDE7">
+            <End Role="requests" EntitySet="requests" />
+            <End Role="transfers" EntitySet="transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__role_perm__role___3864608B" Association="Self.FK__role_perm__role___3864608B">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="role_permissions" EntitySet="role_permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__role_id__3E1D39E1" Association="Self.FK__users__role_id__3E1D39E1">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user_logs__user___44CA3770" Association="Self.FK__user_logs__user___44CA3770">
+            <End Role="users" EntitySet="users" />
+            <End Role="user_logs" EntitySet="user_logs" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(KOBDB_Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(KOBDB_Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KOBDB_ModelStoreContainer" CdmEntityContainer="KOBDB_Entites">
+          <EntitySetMapping Name="blood_donations">
+            <EntityTypeMapping TypeName="KOBDB_Model.blood_donations">
+              <MappingFragment StoreEntitySet="blood_donations">
+                <ScalarProperty Name="donation_id" ColumnName="donation_id" />
+                <ScalarProperty Name="donor_id" ColumnName="donor_id" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="donation_date" ColumnName="donation_date" />
+                <ScalarProperty Name="bag_barcode" ColumnName="bag_barcode" />
+                <ScalarProperty Name="amount_ml" ColumnName="amount_ml" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="rejection_reason" ColumnName="rejection_reason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="blood_stocks">
+            <EntityTypeMapping TypeName="KOBDB_Model.blood_stocks">
+              <MappingFragment StoreEntitySet="blood_stocks">
+                <ScalarProperty Name="stock_id" ColumnName="stock_id" />
+                <ScalarProperty Name="donation_id" ColumnName="donation_id" />
+                <ScalarProperty Name="product_type" ColumnName="product_type" />
+                <ScalarProperty Name="blood_type" ColumnName="blood_type" />
+                <ScalarProperty Name="rh_factor" ColumnName="rh_factor" />
+                <ScalarProperty Name="expiration_date" ColumnName="expiration_date" />
+                <ScalarProperty Name="is_used" ColumnName="is_used" />
+                <ScalarProperty Name="location_shelf" ColumnName="location_shelf" />
+                <ScalarProperty Name="entry_date" ColumnName="entry_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cities">
+            <EntityTypeMapping TypeName="KOBDB_Model.city">
+              <MappingFragment StoreEntitySet="cities">
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="KOBDB_Model.department">
+              <MappingFragment StoreEntitySet="departments">
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="districts">
+            <EntityTypeMapping TypeName="KOBDB_Model.district">
+              <MappingFragment StoreEntitySet="districts">
+                <ScalarProperty Name="district_id" ColumnName="district_id" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="district_name" ColumnName="district_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="donors">
+            <EntityTypeMapping TypeName="KOBDB_Model.donor">
+              <MappingFragment StoreEntitySet="donors">
+                <ScalarProperty Name="donor_id" ColumnName="donor_id" />
+                <ScalarProperty Name="tckn" ColumnName="tckn" />
+                <ScalarProperty Name="name_surname" ColumnName="name_surname" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="blood_type" ColumnName="blood_type" />
+                <ScalarProperty Name="rh_factor" ColumnName="rh_factor" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="district_id" ColumnName="district_id" />
+                <ScalarProperty Name="address_detail" ColumnName="address_detail" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="last_donation_date" ColumnName="last_donation_date" />
+                <ScalarProperty Name="is_organ_donor" ColumnName="is_organ_donor" />
+                <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="health_questionnaires">
+            <EntityTypeMapping TypeName="KOBDB_Model.health_questionnaires">
+              <MappingFragment StoreEntitySet="health_questionnaires">
+                <ScalarProperty Name="questionnaire_id" ColumnName="questionnaire_id" />
+                <ScalarProperty Name="donor_id" ColumnName="donor_id" />
+                <ScalarProperty Name="form_date" ColumnName="form_date" />
+                <ScalarProperty Name="is_eligible" ColumnName="is_eligible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hospitals">
+            <EntityTypeMapping TypeName="KOBDB_Model.hospital">
+              <MappingFragment StoreEntitySet="hospitals">
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="hospital_name" ColumnName="hospital_name" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lab_tests">
+            <EntityTypeMapping TypeName="KOBDB_Model.lab_tests">
+              <MappingFragment StoreEntitySet="lab_tests">
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
+                <ScalarProperty Name="donation_id" ColumnName="donation_id" />
+                <ScalarProperty Name="test_date" ColumnName="test_date" />
+                <ScalarProperty Name="hepatitis_b" ColumnName="hepatitis_b" />
+                <ScalarProperty Name="hepatitis_c" ColumnName="hepatitis_c" />
+                <ScalarProperty Name="hiv" ColumnName="hiv" />
+                <ScalarProperty Name="syphilis" ColumnName="syphilis" />
+                <ScalarProperty Name="test_result" ColumnName="test_result" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="organ_donations">
+            <EntityTypeMapping TypeName="KOBDB_Model.organ_donations">
+              <MappingFragment StoreEntitySet="organ_donations">
+                <ScalarProperty Name="organ_id" ColumnName="organ_id" />
+                <ScalarProperty Name="donor_id" ColumnName="donor_id" />
+                <ScalarProperty Name="organ_name" ColumnName="organ_name" />
+                <ScalarProperty Name="tissue_type_hla" ColumnName="tissue_type_hla" />
+                <ScalarProperty Name="donation_date" ColumnName="donation_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="is_matched" ColumnName="is_matched" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patients">
+            <EntityTypeMapping TypeName="KOBDB_Model.patient">
+              <MappingFragment StoreEntitySet="patients">
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="tckn" ColumnName="tckn" />
+                <ScalarProperty Name="name_surname" ColumnName="name_surname" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="blood_type" ColumnName="blood_type" />
+                <ScalarProperty Name="rh_factor" ColumnName="rh_factor" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
+                <ScalarProperty Name="urgency_status" ColumnName="urgency_status" />
+                <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="permissions">
+            <EntityTypeMapping TypeName="KOBDB_Model.permission">
+              <MappingFragment StoreEntitySet="permissions">
+                <ScalarProperty Name="permission_id" ColumnName="permission_id" />
+                <ScalarProperty Name="permission_key" ColumnName="permission_key" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="requests">
+            <EntityTypeMapping TypeName="KOBDB_Model.request">
+              <MappingFragment StoreEntitySet="requests">
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="request_type" ColumnName="request_type" />
+                <ScalarProperty Name="required_product" ColumnName="required_product" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="request_date" ColumnName="request_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="priority_score" ColumnName="priority_score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role_permissions">
+            <EntityTypeMapping TypeName="KOBDB_Model.role_permissions">
+              <MappingFragment StoreEntitySet="role_permissions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="permission_id" ColumnName="permission_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="KOBDB_Model.role">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KOBDB_Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transfers">
+            <EntityTypeMapping TypeName="KOBDB_Model.transfer">
+              <MappingFragment StoreEntitySet="transfers">
+                <ScalarProperty Name="transfer_id" ColumnName="transfer_id" />
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="stock_id" ColumnName="stock_id" />
+                <ScalarProperty Name="organ_id" ColumnName="organ_id" />
+                <ScalarProperty Name="courier_name" ColumnName="courier_name" />
+                <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+                <ScalarProperty Name="actual_arrival" ColumnName="actual_arrival" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_logs">
+            <EntityTypeMapping TypeName="KOBDB_Model.user_logs">
+              <MappingFragment StoreEntitySet="user_logs">
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="action_type" ColumnName="action_type" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="log_date" ColumnName="log_date" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="KOBDB_Model.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name_surname" ColumnName="name_surname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="is_locked" ColumnName="is_locked" />
+                <ScalarProperty Name="failed_login_count" ColumnName="failed_login_count" />
+                <ScalarProperty Name="last_login_date" ColumnName="last_login_date" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="KOBDB_Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="KOBDB_Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="KOBDB_Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="KOBDB_Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KOBDB_Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="KOBDB_Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KOBDB_Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="KOBDB_Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="KOBDB_Model.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
